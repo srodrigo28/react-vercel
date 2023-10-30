@@ -1,0 +1,43 @@
+*{
+    border: none;
+}
+.fild-50{
+    width: 50px;
+    text-align: center;
+}
+.fild-100{
+    width: 128px;
+    text-align: center;
+}
+.fild-btn{
+    display: flex;
+    gap: 8px;
+}
+.fa-pen-to-square, .fa-trash-can{
+    font-size: 25px;
+    border: none;
+}
+.fa-pen-to-square:hover{
+    opacity: .5;
+}
+tr:hover{
+    cursor: pointer;
+    background-color: blueviolet !important;
+}
+.sumir{
+    display: none;
+}
+label{
+    font-weight: bold;
+}
+.text-end{
+    justify-content: end;
+    font-weight: bold;
+}
+.text-end .col-2 input{
+    font-weight: bold;
+}
+.center{
+    display: flex;
+    justify-content: center;
+}
