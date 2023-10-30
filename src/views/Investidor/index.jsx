@@ -1,5 +1,6 @@
 import './style.css'
 import { useState, useEffect } from "react";
+import { InputMask  } from '@react-input/mask';
 
 import axios from "axios";
 import CountUp from 'react-countup';
@@ -8,6 +9,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Investidor() {
+    const [detail, setDetail] = useState(null);
+
     const total = 1000
     const url = "https://json-server-v.vercel.app/investidor";
     const [ data, setData] = useState([]); // Controle de carregamento e atualização da api
@@ -104,6 +107,15 @@ export function Investidor() {
     /** View */
     return(
         <div className="container pt-3">
+
+             <InputMask
+                mask="1yyy"
+                replacement={{ _: /\d/ }}
+                value={detail?.value ?? ''}
+                onMask={(event) => setDetail(event.detail)}
+            />
+            
+            {detail?.input && !detail.isValid && <span>The field is not filled.</span>}
              <ToastContainer />
             {/* Gerador PDF  */}
             <button className='btn btn-primary' onClick={ () => toPDF() }>Download PDF</button>
