@@ -1,6 +1,5 @@
 import './style.css'
 import { useState, useEffect } from "react";
-import ApexCharts from 'apexcharts'
 
 import axios from "axios";
 import CountUp from 'react-countup';
@@ -9,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Investidor() {
+    const total = 1000
     const url = "https://json-server-v.vercel.app/investidor";
     const [ data, setData] = useState([]); // Controle de carregamento e atualização da api
 
@@ -16,28 +16,30 @@ export function Investidor() {
     const [ nome, setNome ]   = useState("")
     const [ dataInvest, setDataInvest ] = useState("")
     const [ percentual, setPercentual ] = useState("")
-    const [ valor, setValor ] = useState("")
+    const [ valor, setValor ] = useState()
 
     const [ classBtnInserir, setClassBtnInserir] = useState('');
     const [ classBtnAlterar, setClassBtnAlterar] = useState('sumir');
 
-    const [total, setTotal] = useState();
+    // const [total, setTotal] = useState();
 
     const { toPDF, targetRef } = usePDF({filename: 'page.pdf'});
+
+//     const calcularA = () => {
+//         /*** Calculando Total Mês */
+//         useEffect( () => {
+//             const newTotal = data.reduce((a, b) => a + parseFloat(b.valor), 0);
+//             setTotal(newTotal);
+//         })
+//    }
     
     /***  Carregar dados iniciais */
     useEffect( () => {
         axios.get(url)
         .then( response => setData(response.data) );
-    }, [data]);
-    
-    /*** Calculando Total Mês */
-    useEffect(() => {
-        const newTotal = data.reduce((a, b) => a + parseFloat(b.valor), 0);
-        setTotal(newTotal);
-    }, [data, total]);
-    
-    console.log("Reduce total fora: " + total)
+    }, []);
+
+
     
     const Inserir = (e) => {
         e.preventDefault()
@@ -79,14 +81,14 @@ export function Investidor() {
     function Alterar(e){
         e.preventDefault()
 
-        axios.put(`${url}/${id}`, {
+        axios.put(url+`/${id}`, {
             nome,
             dataInvest,
             percentual,
             valor
         })
         .then( () => {
-                toast(nome + " Atualizado com sucesso");
+                alert(nome + " Atualizado com sucesso");
                 
                 setNome(''), setDataInvest(''), setPercentual(''), setValor(''), setId('');
 
@@ -98,24 +100,6 @@ export function Investidor() {
             console.log('erro: ' + error)
         })
     }
-
-    /** Gerando Gráfico */
-    var options = {
-        chart: {
-          type: 'bar'
-        },
-        series: [
-          {
-            name: 'sales',
-            data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
-          }
-        ],
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-        }
-      }
-      var chart = new ApexCharts(document.querySelector('#chart'), options)
-      chart.render()
 
     /** View */
     return(
@@ -217,7 +201,7 @@ export function Investidor() {
                     }
                 </tbody>
             </table>
-            {/* Totalizador Table */}
+            {/* Totalizador Table */ }
             <div className="row text-end">
                 <div className="col-2">
                 <strong>Total: </strong><CountUp className='btn btn-primary'

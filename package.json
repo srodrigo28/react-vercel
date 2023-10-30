@@ -5,8 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "api": "json-server --watch ./src/service/db.json --port 3001",
-    "api2": "json-server --watch ./src/service/db2.json --port 3002",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

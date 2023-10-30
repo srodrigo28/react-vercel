@@ -45,6 +45,18 @@ export function Condominio() {
         
     }
 
+    const Remover =(id, nome) => {
+        const res = window.confirm('Deseja realmente excluir? ' + nome)
+
+        console.log(res)
+        /**
+        if(res === true){
+            axios.delete(`${url}/${id}`)
+            return false
+        }
+        */
+    }
+
     return(
         <div className="container">
             <h1 className="text-center mt-3 mb-3">Controle Condominio</h1>
@@ -105,7 +117,7 @@ export function Condominio() {
             
                 <tbody>
                     { data.map((item) => (
-                        <tr  key={item.id+1}>
+                        <tr  key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.nome}</td>
                             <td>{item.cnpj}</td>
@@ -113,11 +125,10 @@ export function Condominio() {
                             <td>{item.cidade}</td>
                             <td>
                                 <button className="btn btn-outline-warning">Editar</button>
-                                <button className="btn btn-outline-danger">Excluir</button>
+                                <button className="btn btn-outline-danger" onChange={ () => Remover( item.id, item.nome ) }> Excluir {item.id} </button>
                             </td>
                         </tr>
-                        ))
-                    }
+                    )) }
                 </tbody>
             </table>
         </div>
