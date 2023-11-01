@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function Condominio() {
-    const url = "https://prisma-2023-2023.vercel.app/condominio"
+    const url = "https://macatto-api2.vercel.app/condominio"
     
     const [data, setData] = useState([]);
 
