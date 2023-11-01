@@ -3,6 +3,7 @@ import axios from "axios";
 
 export function Condominio() {
     const url = "https://macatto-api2.vercel.app/condominio"
+    // const [ id, setId ]   = useState("")
     
     const [data, setData] = useState([]);
 
@@ -25,7 +26,7 @@ export function Condominio() {
 
        console.log(nome, cnpj, estadual, contato, email, cidade, endereco);
 
-        /***     */
+        /***     */ 
             axios.post(url, {
                 nome,
                 cnpj,
@@ -48,9 +49,11 @@ export function Condominio() {
 
     const Remover =(id, nome) => {
         const res = window.confirm('Deseja realmente excluir? ' + nome)
-
-        console.log(res)
-
+        if(res === true){
+             console.log(url + "/" + id);
+            // axios.delete(url + "/" + id)
+            return false
+        }
     }
 
     return(
@@ -108,6 +111,7 @@ export function Condominio() {
                         <th>CNPJ</th>
                         <th>Insc. Estadual</th>
                         <th>Cidade</th>
+                        <th>Endereço</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -123,7 +127,7 @@ export function Condominio() {
                             <td>{item.endereco}</td>
                             <td>
                                 <button className="btn btn-outline-warning">Editar</button>
-                                <button className="btn btn-outline-danger" onChange={ () => Remover( item.id, item.nome ) }> Excluir </button>
+                                <button onClick={ () => Remover(item.id, item.nome) }  className="btn btn-outline-danger"> Excluir </button>
                             </td>
                         </tr>
                     )) }
