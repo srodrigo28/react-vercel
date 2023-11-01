@@ -25,7 +25,7 @@ export function Condominio() {
 
        console.log(nome, cnpj, estadual, contato, email, cidade, endereco);
 
-        /***    
+        /***     */
             axios.post(url, {
                 nome,
                 cnpj,
@@ -43,7 +43,7 @@ export function Condominio() {
             .catch( (error) => {
                 console.log('erro: ' + error)
             })
-        */
+       
     }
 
     const Remover =(id, nome) => {
