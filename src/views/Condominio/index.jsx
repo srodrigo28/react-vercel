@@ -56,6 +56,14 @@ export function Condominio() {
         }
     }
 
+    /** Metodo Carregar campos para editar  */
+    // const CarregaCampos = (nome, dataInvest, percentual, valor, id) => {
+    //     setClassBtnInserir('sumir')
+    //     setClassBtnAlterar('')
+
+    //     setNome(nome), setDataInvest(dataInvest), setPercentual(percentual), setValor(valor), setId(id);
+    // }
+
     return(
         <div className="container">
             <h1 className="text-center mt-3 mb-3">Controle Condominio</h1>
