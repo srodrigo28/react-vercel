@@ -25,14 +25,15 @@ export function Condominio() {
 
        console.log(nome, cnpj, estadual, contato, email, cidade, endereco);
 
-        /***    */
+        /***    
             axios.post(url, {
                 nome,
                 cnpj,
                 estadual,
                 contato,
                 email,
-                cidade
+                cidade,
+                endereco
             })
     
             .then( () =>
@@ -42,7 +43,7 @@ export function Condominio() {
             .catch( (error) => {
                 console.log('erro: ' + error)
             })
-        
+        */
     }
 
     const Remover =(id, nome) => {
@@ -104,10 +105,10 @@ export function Condominio() {
                     <tr>
                         <th>Cod.</th>
                         <th>Nome</th>
-                        {/* <th>CNPJ</th> */}
-                        {/* <th>Insc. Estadual</th> */}
+                        <th>CNPJ</th>
+                        <th>Insc. Estadual</th>
                         <th>Cidade</th>
-                        {/* <th>Ações</th> */}
+                        <th>Ações</th>
                     </tr>
                 </thead>
             
@@ -116,9 +117,10 @@ export function Condominio() {
                         <tr  key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.nome}</td>
-                            {/* <td>{item.cnpj}</td> */}
-                            {/* <td>{item.estadual}</td> */}
+                            <td>{item.cnpj}</td>
+                            <td>{item.estadual}</td>
                             <td>{item.cidade}</td>
+                            <td>{item.endereco}</td>
                             <td>
                                 <button className="btn btn-outline-warning">Editar</button>
                                 <button className="btn btn-outline-danger" onChange={ () => Remover( item.id, item.nome ) }> Excluir </button>
