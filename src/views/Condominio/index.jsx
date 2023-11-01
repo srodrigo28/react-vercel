@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function Condominio() {
-    const url = "https://json-server-v.vercel.app/condominio"
+    const url = "https://prisma-2023-2023.vercel.app/condominio"
     
     const [data, setData] = useState([]);
 
@@ -49,12 +49,7 @@ export function Condominio() {
         const res = window.confirm('Deseja realmente excluir? ' + nome)
 
         console.log(res)
-        /**
-        if(res === true){
-            axios.delete(`${url}/${id}`)
-            return false
-        }
-        */
+
     }
 
     return(
@@ -103,15 +98,16 @@ export function Condominio() {
 
             <h1 className="text-center">Lista</h1>
 
+            <div className="table-responsive-sm">
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Código</th>
+                        <th>Cod.</th>
                         <th>Nome</th>
-                        <th>CNPJ</th>
-                        <th>Insc. Estadual</th>
+                        {/* <th>CNPJ</th> */}
+                        {/* <th>Insc. Estadual</th> */}
                         <th>Cidade</th>
-                        <th>Ações</th>
+                        {/* <th>Ações</th> */}
                     </tr>
                 </thead>
             
@@ -120,17 +116,18 @@ export function Condominio() {
                         <tr  key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.nome}</td>
-                            <td>{item.cnpj}</td>
-                            <td>{item.estadual}</td>
+                            {/* <td>{item.cnpj}</td> */}
+                            {/* <td>{item.estadual}</td> */}
                             <td>{item.cidade}</td>
                             <td>
                                 <button className="btn btn-outline-warning">Editar</button>
-                                <button className="btn btn-outline-danger" onChange={ () => Remover( item.id, item.nome ) }> Excluir {item.id} </button>
+                                <button className="btn btn-outline-danger" onChange={ () => Remover( item.id, item.nome ) }> Excluir </button>
                             </td>
                         </tr>
                     )) }
                 </tbody>
             </table>
+            </div>
         </div>
     )
 }
