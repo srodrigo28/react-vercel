@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import './style.css'
 
 export function Condominio() {
     const url = "https://macatto-api2.vercel.app/condominio"
-    // const [ id, setId ]   = useState("")
+    const [ id, setId ]   = useState("")
+    const [ classBtnInserir, setClassBtnInserir] = useState('');
+    const [ classBtnAlterar, setClassBtnAlterar] = useState('sumir');
     
     const [data, setData] = useState([]);
 
@@ -21,7 +24,7 @@ export function Condominio() {
     const [ cidade, setCidade ] = useState("")
     const [ endereco, setEndereco ] = useState("")
 
-    const Salvar = (event) => {
+    const Inserir = (event) => {
         event.preventDefault();
 
        console.log(nome, cnpj, estadual, contato, email, cidade, endereco);
@@ -50,19 +53,44 @@ export function Condominio() {
     const Remover =(id, nome) => {
         const res = window.confirm('Deseja realmente excluir? ' + nome)
         if(res === true){
-             console.log(url + "/" + id);
+            console.log(url + "/" + id);
             // axios.delete(url + "/" + id)
             return false
         }
     }
 
     /** Metodo Carregar campos para editar  */
-    // const CarregaCampos = (nome, dataInvest, percentual, valor, id) => {
-    //     setClassBtnInserir('sumir')
-    //     setClassBtnAlterar('')
+    const CarregaCampos = (nome, cnpj, estadual, contato, email, cidade, endereco, id) => {
+        setClassBtnInserir('sumir')
+        setClassBtnAlterar('')
 
-    //     setNome(nome), setDataInvest(dataInvest), setPercentual(percentual), setValor(valor), setId(id);
-    // }
+        console.log(nome, cnpj, estadual, contato, email, cidade, endereco, id)
+
+        setNome(nome), setCnpj(cnpj), setEstadual(estadual), 
+        setContato(contato), setEmail(email), setCidade(cidade), setEndereco(endereco), setId(id);
+    }
+
+     /** Metodo Alterar  */
+     function Alterar(e){
+        e.preventDefault()
+
+        axios.put(url+`/${id}`, {
+            nome, estadual, contato, email, cidade, endereco
+        })
+        .then( () => {
+                alert(nome + " Atualizado com sucesso");
+                
+                setNome(nome), setCnpj(cnpj), setEstadual(estadual), 
+                setContato(contato), setEmail(email), setCidade(cidade), setEndereco(endereco), setId(id);
+
+                setClassBtnInserir('')
+                setClassBtnAlterar('sumir')
+            }
+        )
+        .catch( (error) => {
+            console.log('erro: ' + error)
+        })
+    }
 
     return(
         <div className="container">
@@ -98,14 +126,17 @@ export function Condominio() {
                         <input type="text" className="form-control" onChange={ e => setCidade(e.target.value)} value={cidade}/>
                     </div>
                 </div>
+
                 <div className="row mb-3">
+                    <input type="hidden" value={id} name="id" onChange={ e => setId(e.target.value)} />
                     <div className="col">
                         <label>Endereço</label>
                         <input type="text" className="form-control" onChange={ e => setEndereco(e.target.value)} value={endereco}/>
                     </div>
                 </div>
-                
-                <button className="btn btn-success" onClick={Salvar}>Cadastrar</button>
+
+                <button className={`btn btn-outline-primary ${classBtnInserir}`} onClick={Inserir}>Salvar</button>
+                <button className={`btn btn-outline-warning ${classBtnAlterar}`} onClick={Alterar}>Editar</button>
             </form>
 
             <h1 className="text-center">Lista</h1>
@@ -115,9 +146,11 @@ export function Condominio() {
                 <thead>
                     <tr>
                         <th>Cod.</th>
-                        <th>Nome</th>
+                        <th>Condominio</th>
                         <th>CNPJ</th>
                         <th>Insc. Estadual</th>
+                        <th>Contato</th>
+                        <th>E-mail</th>
                         <th>Cidade</th>
                         <th>Endereço</th>
                         <th>Ações</th>
@@ -131,10 +164,12 @@ export function Condominio() {
                             <td>{item.nome}</td>
                             <td>{item.cnpj}</td>
                             <td>{item.estadual}</td>
+                            <td>{item.contato}</td>
+                            <td>{item.email}</td>
                             <td>{item.cidade}</td>
                             <td>{item.endereco}</td>
                             <td>
-                                <button className="btn btn-outline-warning">Editar</button>
+                                <button onClick={ () => CarregaCampos(item.nome, item.cnpj, item.estadual, item.contato, item.email, item.cidade, item.endereco, item.id)} className="btn btn-outline-warning">Editar</button>
                                 <button onClick={ () => Remover(item.id, item.nome) }  className="btn btn-outline-danger"> Excluir </button>
                             </td>
                         </tr>
