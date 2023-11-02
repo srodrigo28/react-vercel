@@ -54,7 +54,7 @@ export function Condominio() {
         const res = window.confirm('Deseja realmente excluir? ' + nome)
         if(res === true){
             console.log(url + "/" + id);
-            // axios.delete(url + "/" + id)
+            axios.delete(url + "/" + id)
             return false
         }
     }
@@ -75,7 +75,7 @@ export function Condominio() {
         e.preventDefault()
 
         axios.put(url+`/${id}`, {
-            nome, estadual, contato, email, cidade, endereco
+            nome, cnpj, estadual, contato, email, cidade, endereco
         })
         .then( () => {
                 alert(nome + " Atualizado com sucesso");
