@@ -169,8 +169,12 @@ export function Condominio() {
                             <td>{item.cidade}</td>
                             <td>{item.endereco}</td>
                             <td>
-                                <button onClick={ () => CarregaCampos(item.nome, item.cnpj, item.estadual, item.contato, item.email, item.cidade, item.endereco, item.id)} className="btn btn-outline-warning">Editar</button>
-                                <button onClick={ () => Remover(item.id, item.nome) }  className="btn btn-outline-danger"> Excluir </button>
+                                <button onClick={ () => CarregaCampos(item.nome, item.cnpj, item.estadual, item.contato, item.email, item.cidade, item.endereco, item.id)} className="btn btn-outline-warning">
+                                    <i className="fa-solid fa-pen-to-square"></i>
+                                </button>
+                                <button onClick={ () => Remover(item.id, item.nome) }  className="btn btn-outline-danger">
+                                    <i className="fa-solid fa-trash-can-arrow-up"></i>
+                                </button>
                             </td>
                         </tr>
                     )) }
