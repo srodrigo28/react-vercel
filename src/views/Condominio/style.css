@@ -41,3 +41,8 @@ label{
     display: flex;
     justify-content: center;
 }
+
+/** Helpes */ 
+.esconder{
+    display: nome;
+}
